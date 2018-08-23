@@ -1,12 +1,11 @@
 ---
-tasks:
+
 - name: Configured NTP in management VRF
   command: "{{item}}"
   with_items:
     - systemctl stop ntp.service
     - systemctl disable ntp.service
     - systemctl start ntp@mgmt
-
 
 - name: Add Cumulus Repo
   apt_repository:
