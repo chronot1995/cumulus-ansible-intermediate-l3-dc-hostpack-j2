@@ -4,12 +4,12 @@ node:
       eth0:
         dhcp:
       eth1:
-        ip: 192.168.11.111/24
-        gw: 192.168.11.1
+        ip:
+        gw:
   server02:
     ports:
       eth0:
         dhcp:
       eth1:
-        ip: 192.168.11.222/24
-        gw: 192.168.11.1
+        ip:
+        gw:

@@ -16,7 +16,7 @@ node:
       anycastip:
       vxlan:
         vni11:
-          vlan: "11"
+          vlan:
     ports:
       - swp1
       - swp2
@@ -25,10 +25,9 @@ node:
       interfaces:
         members:
     switching:
-      swp10:
-        mode: access
+      swpint:
+        mode:
         vlans:
-          - "11"
     routing:
       lo: 10.1.1.1/32
       ospf:
@@ -41,6 +40,7 @@ node:
             peers:
               - swp1
               - swp2
+              - swp10
           internal:
             peers:
       svi:
@@ -67,7 +67,7 @@ node:
       anycastip:
       vxlan:
         vni11:
-          vlan: "11"
+          vlan:
     ports:
       - swp1
       - swp2
@@ -76,10 +76,9 @@ node:
       interfaces:
         members:
     switching:
-      swp10:
-        mode: access
+      swpint:
+        mode:
         vlans:
-          - "11"
     routing:
       lo: 10.2.2.2/32
       ospf:
@@ -92,6 +91,7 @@ node:
             peers:
               - swp1
               - swp2
+              - swp10
           internal:
             peers:
       svi:
