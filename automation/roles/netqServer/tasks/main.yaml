@@ -16,16 +16,6 @@
 #  become_user: cumulus
 #  when: inventory_hostname == "server02"
 
-- name: Correct LLDP Settings
-  lineinfile:
-    dest: /etc/lldpd.d/port_info.conf
-    line: "configure lldp portidsubtype ifname"
-    create: yes
-  notify: restart LLDP
-
-- name: Apply LLDP Settings
-  meta: flush_handlers
-
 - name: Add Cumulus Apt Key
   apt_key:
     url: "https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey"
@@ -37,22 +27,35 @@
     state: present
     update_cache: no
 
+- name: Install Python3-pip
+  apt:
+    name: python3-pip
+    update_cache: yes
+
+- name: Install Pyyaml
+  command: pip3 install PyYAML
+
+- name: Install Pynetbox
+  command: pip3 install pynetbox
+
 - name: Install NetQ
   apt:
     name: cumulus-netq
     update_cache: yes
-  register: install-netq
 
-- name: Restart Rsyslog
-  service:
-    name: rsyslog
-    state: restarted
+- name: Enable and start netqd
+  command: "{{item}}"
+  with_items:
+    - systemctl stop netqd
+    - systemctl enable netqd
+    - systemctl start netqd
 
-- name: Enable NetQ Service
-  service:
-    name: netqd
-    enabled: yes
-    state: started
+- name: Enable and start netq-agent
+  command: "{{item}}"
+  with_items:
+    - systemctl stop netq-agent
+    - systemctl enable netq-agent
+    - systemctl start netq-agent
 
 - name: Pause to let NetQ service to start
   pause:
@@ -60,6 +63,11 @@
 
 - name: Add netq server IP
   command: netq config add server 192.168.200.254
+
+- name: Restart Rsyslog
+  service:
+    name: rsyslog
+    state: restarted
 
 - name: Restart NetQ Agent
   command: netq config restart agent
