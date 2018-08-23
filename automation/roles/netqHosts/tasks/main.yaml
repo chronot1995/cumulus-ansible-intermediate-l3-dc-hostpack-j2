@@ -1,6 +1,5 @@
 ---
 
----
 - name: Check NetQ install
   command: apt search cumulus-netq
   register: netq_installed
