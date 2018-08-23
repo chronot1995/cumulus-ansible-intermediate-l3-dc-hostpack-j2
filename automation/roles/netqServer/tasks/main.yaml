@@ -31,6 +31,11 @@
     url: "https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey"
     state: present
 
+- name: Install Python-Apt
+  apt:
+    name: python-apt
+    update_cache: yes
+
 - name: Add Cumulus Repo
   apt_repository:
     repo: deb https://apps3.cumulusnetworks.com/repos/deb xenial netq-1.3
