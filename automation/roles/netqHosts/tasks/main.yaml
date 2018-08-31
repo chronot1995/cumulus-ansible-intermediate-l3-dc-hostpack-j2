@@ -6,7 +6,7 @@
 
 - name: Add Cumulus Apt Key
   apt_key:
-    url: "https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey"
+    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
     state: present
   when: netq_installed.stdout.find('[installed]') == -1
 
