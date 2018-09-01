@@ -70,4 +70,4 @@
 #- name: Pause to let NetQ service to start
 #  pause:
 #    seconds: 5
-  when: netq_installed.stdout.find('[installed]') == -1
+#  when: netq_installed.stdout.find('[installed]') == -1
