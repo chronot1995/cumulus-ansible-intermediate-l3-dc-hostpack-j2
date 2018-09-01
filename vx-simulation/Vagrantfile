@@ -156,7 +156,7 @@ vagrant_interface_rule
 # Run Any Platform Specific Code and Apply the interface Re-map
     #   (may or may not perform a reboot depending on platform)
     device.vm.provision :shell , :inline => $script
-    
+
 end
 
   ##### DEFINE VM for oob-mgmt-switch #####
@@ -264,7 +264,7 @@ end
     device.vm.hostname = "switch01"
 
     device.vm.box = "CumulusCommunity/cumulus-vx"
-    device.vm.box_version = "3.5.3"
+    device.vm.box_version = "3.6.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_switch01"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
@@ -354,7 +354,7 @@ end
     device.vm.hostname = "switch02"
 
     device.vm.box = "CumulusCommunity/cumulus-vx"
-    device.vm.box_version = "3.5.3"
+    device.vm.box_version = "3.6.2"
     device.vm.provider "virtualbox" do |v|
       v.name = "#{simid}_switch02"
       v.customize ["modifyvm", :id, '--audiocontroller', 'AC97', '--audio', 'Null']
