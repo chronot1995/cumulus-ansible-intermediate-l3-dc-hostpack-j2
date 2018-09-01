@@ -4,11 +4,11 @@
   command: apt search cumulus-netq
   register: netq_installed
 
-#- name: Add Cumulus Apt Key
-#  apt_key:
-#    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
-#    state: present
-#  when: netq_installed.stdout.find('[installed]') == -1
+- name: Add Cumulus Apt Key
+  apt_key:
+    url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
+    state: present
+  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add Cumulus Repo
   apt_repository:
