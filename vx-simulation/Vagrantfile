@@ -113,6 +113,7 @@ Vagrant.configure("2") do |config|
     device.vm.provider "virtualbox" do |vbox|
       vbox.customize ['modifyvm', :id, '--nicpromisc2', 'allow-all']
       vbox.customize ["modifyvm", :id, "--nictype1", "virtio"]
+      vbox.customize ["modifyvm", :id, "--nictype2", "virtio"]
     end
 
     # Fixes "stdin: is not a tty" and "mesg: ttyname failed : Inappropriate ioctl for device"  messages --> https://github.com/mitchellh/vagrant/issues/1673
