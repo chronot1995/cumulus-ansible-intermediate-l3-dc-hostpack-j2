@@ -6,10 +6,10 @@
   become: true
   roles:
   - switches
-  - netqHosts
+  - netqOnASwitch
 
 - hosts: servers
   become: true
   roles:
   - servers
-  - netqServer
+  - netqOnLinux
