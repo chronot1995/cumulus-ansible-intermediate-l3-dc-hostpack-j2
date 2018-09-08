@@ -51,7 +51,6 @@ install_ansible(){
 	sudo pip install ansible==$ansible_version --upgrade
 }
 
-
 ## MOTD
 echo " ### Overwriting MOTD ###"
 cat <<EOT > /etc/motd.base64

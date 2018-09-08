@@ -51,7 +51,7 @@
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add netq server IP
-  command: netq config add server 192.168.200.13 vrf mgmt
+  command: netq config add server 192.168.200.250 vrf mgmt
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: NetQ config add stats

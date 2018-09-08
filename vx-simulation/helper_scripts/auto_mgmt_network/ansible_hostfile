@@ -26,7 +26,7 @@ switch02 ansible_host=192.168.200.2
 
 
 [host]
-telemetry ansible_host=192.168.200.13
+telemetry ansible_host=192.168.200.250
 server01 ansible_host=192.168.200.11
 server02 ansible_host=192.168.200.12
 
