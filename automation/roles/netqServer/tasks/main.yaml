@@ -45,7 +45,7 @@
     seconds: 5
 
 - name: Add netq server IP
-  command: netq config add server 192.168.200.254
+  command: netq config add server 192.168.200.13
 
 - name: Restart Rsyslog
   service:
