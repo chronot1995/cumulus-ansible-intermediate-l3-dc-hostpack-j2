@@ -12,14 +12,14 @@
 
 - name: Add Cumulus Repo - netq-latest
   apt_repository:
-    repo: deb https://apps3.cumulusnetworks.com/repos/deb xenial netq-latest
+    repo: deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb xenial netq-latest
     state: present
     update_cache: no
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add Cumulus Repo - roh-3
   apt_repository:
-    repo: deb https://apps3.cumulusnetworks.com/repos/deb xenial roh-3
+    repo: deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb xenial roh-3
     state: present
     update_cache: no
   when: netq_installed.stdout.find('[installed]') == -1
@@ -79,7 +79,7 @@
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add netq server IP
-  command: netq config add server 192.168.200.250 vrf mgmt
+  command: netq config add server 192.168.200.250
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: NetQ config add stats
