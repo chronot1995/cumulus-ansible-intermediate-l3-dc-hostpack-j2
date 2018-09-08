@@ -43,6 +43,7 @@
   apt:
     name: ntpd
     update_cache: yes
+  notify: restart NTPD
 
 - name: Install NetQ
   apt:
