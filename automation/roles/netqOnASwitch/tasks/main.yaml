@@ -10,17 +10,6 @@
     state: present
     update_cache: no
 
-#- name: Install Python3-pip
-#  apt:
-#    name: python3-pip
-#    update_cache: yes
-
-#- name: Install Pyyaml
-#  command: pip3 install PyYAML
-
-#- name: Install Pynetbox
-#  command: pip3 install pynetbox
-
 - name: Install NetQ
   apt:
     name: cumulus-netq
