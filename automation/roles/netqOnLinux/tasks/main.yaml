@@ -10,12 +10,39 @@
     state: present
   when: netq_installed.stdout.find('[installed]') == -1
 
-- name: Add Cumulus Repo
+- name: Add Cumulus Repo - netq-latest
   apt_repository:
-    repo: deb http://apps3.cumulusnetworks.com/repos/deb CumulusLinux-3 netq-latest
+    repo: deb https://apps3.cumulusnetworks.com/repos/deb xenial netq-latest
     state: present
     update_cache: no
   when: netq_installed.stdout.find('[installed]') == -1
+
+- name: Add Cumulus Repo - roh-3
+  apt_repository:
+    repo: deb https://apps3.cumulusnetworks.com/repos/deb xenial roh-3
+    state: present
+    update_cache: no
+  when: netq_installed.stdout.find('[installed]') == -1
+
+- name: Install LLDPd
+  apt:
+    name: lldpd
+    update_cache: yes
+
+- name: Correct LLDP Settings
+  lineinfile:
+    dest: /etc/lldpd.d/port_info.conf
+    line: "configure lldp portidsubtype ifname"
+    create: yes
+  notify: restart LLDP
+
+- name: Apply LLDP Settings
+  meta: flush_handlers
+
+- name: Install ntp
+  apt:
+    name: ntpd
+    update_cache: yes
 
 - name: Install NetQ
   apt:
