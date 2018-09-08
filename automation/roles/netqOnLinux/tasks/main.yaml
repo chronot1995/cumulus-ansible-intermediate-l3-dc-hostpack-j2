@@ -41,7 +41,7 @@
 
 - name: Install ntp
   apt:
-    name: ntpd
+    name: ntp
     update_cache: yes
   notify: restart NTPD
 
