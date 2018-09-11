@@ -116,7 +116,7 @@ B>* 10.4.4.4/32 [20/0] via fe80::4638:39ff:fe00:4, swp1, 00:00:04
 B>* 192.168.200.0/24 [20/0] via fe80::4638:39ff:fe00:5, swp10, 00:01:04
 ```
 
-One can also view the MAC addresses of the two switches within the EVPN instance by running the following command:
+One can also use NetQ to view all of the BGP peers across the network:
 
 ```
 cumulus@switch01:mgmt-vrf:~$ netq show bgp
@@ -164,7 +164,7 @@ Will be replaced with the following:
     #Install Automation Tools
     puppet=0
     ansible=1
-    ansible_version=2.6.2
+    ansible_version=2.6.3
 
 The following stanza will replace the install_ansible function:
 
