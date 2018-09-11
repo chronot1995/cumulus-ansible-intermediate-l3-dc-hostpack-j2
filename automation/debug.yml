@@ -1,5 +1,5 @@
 - name: Simple Debug Script
-  hosts: switch01
+  hosts: servers
   gather_facts: yes
 
   tasks:
