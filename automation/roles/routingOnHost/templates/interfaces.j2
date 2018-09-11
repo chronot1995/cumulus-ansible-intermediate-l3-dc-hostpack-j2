@@ -19,5 +19,6 @@ iface mgmt
 auto {{interface}}
 iface {{interface}}
    mtu 1500
+   post-up ip link set promisc on dev eth1
 
 {% endfor %}
