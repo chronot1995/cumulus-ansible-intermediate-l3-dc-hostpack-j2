@@ -1,5 +1,5 @@
 node:
-  switch01:
+  server01:
     mlag:
       address:
       backupip:
@@ -18,9 +18,7 @@ node:
         vni11:
           vlan:
     ports:
-      - swp1
-      - swp2
-      - swp10
+      - eth1
     lacp:
       interfaces:
         members:
@@ -29,18 +27,16 @@ node:
         mode:
         vlans:
     routing:
-      lo: 10.1.1.1/32
+      lo: 10.3.3.3/32
       ospf:
         area:
         neighbors:
       bgp:
-        asn: 65111
+        asn: 65333
         underlay:
           external:
             peers:
-              - swp1
-              - swp2
-              - swp10
+              - eth1
           internal:
             peers:
       svi:
@@ -50,7 +46,7 @@ node:
           vrrp:
             mac:
             ip:
-  switch02:
+  server02:
     mlag:
       address:
       backupip:
@@ -69,9 +65,7 @@ node:
         vni11:
           vlan:
     ports:
-      - swp1
-      - swp2
-      - swp10
+      - eth1
     lacp:
       interfaces:
         members:
@@ -80,18 +74,16 @@ node:
         mode:
         vlans:
     routing:
-      lo: 10.2.2.2/32
+      lo: 10.4.4.4/32
       ospf:
         area:
         neighbors:
       bgp:
-        asn: 65222
+        asn: 65444
         underlay:
           external:
             peers:
-              - swp1
-              - swp2
-              - swp10
+              - eth1
           internal:
             peers:
       svi:
