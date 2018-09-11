@@ -22,8 +22,8 @@ First, make sure that the following is currently running on your machine:
 
 3. In order for NetQ to work correctly, you need to have the Cumulus Telemetry server installed within Vagrant with the name of "cumulus/ts":
 
-```vagrant box list | grep -i ts```
-```cumulus/ts   (virtualbox, 1.3.0)```
+   ```vagrant box list | grep -i ts```
+   ```cumulus/ts   (virtualbox, 1.3.0)```
 
 4. Copy the Git repo to your local machine:
 
