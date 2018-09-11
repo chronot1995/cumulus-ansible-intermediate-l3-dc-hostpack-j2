@@ -55,10 +55,8 @@
   command: "{{item}}"
   with_items:
     - systemctl stop netqd.service
-    - systemctl disable netqd.service
     - systemctl start netqd.service
     - systemctl stop netq-agent.service
-    - systemctl disable netq-agent.service
     - systemctl start netq-agent.service
 
 - name: Add netq server IP
