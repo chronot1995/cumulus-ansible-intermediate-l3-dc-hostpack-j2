@@ -5,8 +5,8 @@
   with_items:
     - systemctl stop ntp.service
     - systemctl disable ntp.service
-    - systemctl start ntp@mgmt.service
-    - systemctl enable ntp@mgmt.service
+    - systemctl start ntp.service
+    - systemctl enable ntp.service
   notify: restart ntpd
 
 - name: Copy FRR daemons file
