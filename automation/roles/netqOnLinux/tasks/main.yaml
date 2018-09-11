@@ -51,31 +51,15 @@
     update_cache: yes
   when: netq_installed.stdout.find('[installed]') == -1
 
-#- name: Add netq to mgmt vrf
-#  lineinfile:
-#    dest: /etc/vrf/systemd.conf
-#    line: "{{ item }}"
-#  with_items:
-#    - 'netq-agent'
-#    - 'netq-notifier'
-#    - 'netqd'
-#  when: netq_installed.stdout.find('[installed]') == -1
-
-#- name: Restart VRF systemctl daemon
-#  command: systemctl daemon-reload
-#  when: netq_installed.stdout.find('[installed]') == -1
-
 - name: Configure NetQ
   command: "{{item}}"
   with_items:
     - systemctl stop netqd.service
     - systemctl disable netqd.service
+    - systemctl enable netqd.service
     - systemctl stop netq-agent.service
     - systemctl disable netq-agent.service
-#    - systemctl enable netqd@mgmt
-#    - systemctl start netqd@mgmt
-#    - systemctl enable netq-agent@mgmt
-#    - systemctl start netq-agent@mgmt
+    - systemctl enable netq-agent.service
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add netq server IP
