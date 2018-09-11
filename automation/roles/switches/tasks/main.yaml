@@ -7,7 +7,7 @@
     - systemctl disable ntp.service
     - systemctl start ntp@mgmt.service
     - systemctl enable ntp@mgmt.service
-  notify: restart NTPD
+  notify: restart ntpd
 
 - name: Copy FRR daemons file
   copy:

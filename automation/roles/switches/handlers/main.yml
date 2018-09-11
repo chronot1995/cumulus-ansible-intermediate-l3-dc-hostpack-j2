@@ -11,3 +11,8 @@
   service:
     name: frr
     state: reloaded
+
+- name: restart ntpd
+  service:
+    name: ntpd
+    state: restarted
