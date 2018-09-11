@@ -1,4 +1,5 @@
 ---
+
 - name: Add Cumulus Apt Key
   apt_key:
     url: "https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey"

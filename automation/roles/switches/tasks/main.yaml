@@ -1,4 +1,14 @@
 ---
+
+- name: Enable and start ntpd in the mgmt VRF
+  command: "{{item}}"
+  with_items:
+    - systemctl stop ntp.service
+    - systemctl disable ntp.service
+    - systemctl start ntp@mgmt.service
+    - systemctl enable ntp@mgmt.service
+  notify: restart NTPD
+
 - name: Copy FRR daemons file
   copy:
     src: daemons

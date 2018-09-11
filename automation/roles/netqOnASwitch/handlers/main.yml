@@ -3,3 +3,8 @@
   service:
     name: lldpd
     state: restarted
+
+- name: restart ntpd
+  service:
+    name: ntpd
+    state: restarted
