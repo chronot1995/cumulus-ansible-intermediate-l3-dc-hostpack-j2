@@ -9,8 +9,13 @@
     name: ntp
     state: restarted
 
+# - name: reload networking
+#  command: "ifreload -a"
+
 - name: reload networking
-  command: "ifreload -a"
+  service:
+    name: networking
+    state: reload
 
 - name: restart frr
   service:
