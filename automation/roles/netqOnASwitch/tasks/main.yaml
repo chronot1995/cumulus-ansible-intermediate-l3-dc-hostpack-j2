@@ -20,30 +20,34 @@
   pause:
     seconds: 5
 
-- name: Add netq server IP
-  command: netq config add server 192.168.200.250 vrf mgmt
-
 - name: Restart Rsyslog
   service:
     name: rsyslog
     state: restarted
 
+- name: Add netq server IP
+  command: netq config add server 192.168.200.250 vrf mgmt
+
 - name: Restart NetQ Agent
   command: netq config restart agent
 
-- name: Enable and start netqd
-  command: "{{item}}"
-  with_items:
-    - systemctl stop netqd
-    - systemctl enable netqd
-    - systemctl start netqd
+- name: Pause to let NetQ service to start
+  pause:
+    seconds: 5
 
-- name: Enable and start netq-agent
-  command: "{{item}}"
-  with_items:
-    - systemctl stop netq-agent
-    - systemctl enable netq-agent
-    - systemctl start netq-agent
+#- name: Enable and start netqd
+#  command: "{{item}}"
+#  with_items:
+#    - systemctl stop netqd
+#    - systemctl enable netqd
+#    - systemctl start netqd
+#
+#- name: Enable and start netq-agent
+#  command: "{{item}}"
+#  with_items:
+#    - systemctl stop netq-agent
+#    - systemctl enable netq-agent
+#    - systemctl start netq-agent
 
 - name: Sleep for server to disconnect
   pause:
