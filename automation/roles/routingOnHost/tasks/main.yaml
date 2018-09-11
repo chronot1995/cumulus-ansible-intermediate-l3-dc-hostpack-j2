@@ -38,3 +38,8 @@
     dest: /etc/frr/frr.conf
     backup: yes
   notify: restart frr
+
+- name: Bring up eth1 interface
+  command: "ifup {{item}}"
+  with_items:
+    - eth1

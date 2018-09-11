@@ -22,7 +22,6 @@ First, make sure that the following is currently running on your machine:
 
 3. In order for NetQ to work correctly, you need to have the Cumulus Telemetry server installed within Vagrant with the name of "cumulus/ts":
 
-   ```vagrant box list | grep -i ts```
    ```cumulus/ts   (virtualbox, 1.3.0)```
 
 4. Copy the Git repo to your local machine:
@@ -81,33 +80,16 @@ cumulus@switch01:mgmt-vrf:~$ net show bgp summary
 show bgp ipv4 unicast summary
 =============================
 BGP router identifier 10.1.1.1, local AS number 65111 vrf-id 0
-BGP table version 3
-RIB entries 5, using 760 bytes of memory
-Peers 2, using 39 KiB of memory
+BGP table version 5
+RIB entries 9, using 1368 bytes of memory
+Peers 3, using 58 KiB of memory
 
 Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
-switch02(swp1)  4      65222      41      41        0    0    0 00:01:36            2
-switch02(swp2)  4      65222      41      43        0    0    0 00:01:36            2
+switch02(swp1)  4      65222     105     105        0    0    0 00:04:54            2
+switch02(swp2)  4      65222     104     105        0    0    0 00:04:53            2
+server01(swp10) 4      65333      13      14        0    0    0 00:00:23            3
 
-Total number of neighbors 2
-
-
-show bgp ipv6 unicast summary
-=============================
-
-show bgp l2vpn evpn summary
-===========================
-BGP router identifier 10.1.1.1, local AS number 65111 vrf-id 0
-BGP table version 0
-RIB entries 3, using 456 bytes of memory
-Peers 2, using 39 KiB of memory
-
-Neighbor        V         AS MsgRcvd MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd
-switch02(swp1)  4      65222      41      41        0    0    0 00:01:36            2
-switch02(swp2)  4      65222      41      43        0    0    0 00:01:36            2
-
-Total number of neighbors 2
-
+Total number of neighbors 3
 ```
 
 One should see that the corresponding loopback route is installed with two next hops / ECMP.
@@ -118,26 +100,38 @@ cumulus@switch01:mgmt-vrf:~$ net show route
 show ip route
 =============
 Codes: K - kernel route, C - connected, S - static, R - RIP,
-       O - OSPF, I - IS-IS, B - BGP, P - PIM, E - EIGRP, N - NHRP,
-       T - Table, v - VNC, V - VNC-Direct, A - Babel,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR,
        > - selected route, * - FIB route
 
-K>* 0.0.0.0/0 [0/0] via 10.0.2.2, vagrant, 00:02:36
-C>* 10.0.2.0/24 is directly connected, vagrant, 00:02:36
-C>* 10.1.1.1/32 is directly connected, lo, 00:02:36
-B>* 10.2.2.2/32 [20/0] via fe80::4638:39ff:fe00:4, swp1, 00:02:33
-  *                    via fe80::4638:39ff:fe00:8, swp2, 00:02:33
+K>* 0.0.0.0/0 [0/0] via 10.0.2.2, vagrant, 00:05:38
+C>* 10.0.2.0/24 is directly connected, vagrant, 00:05:38
+C>* 10.1.1.1/32 is directly connected, lo, 00:05:38
+B>* 10.2.2.2/32 [20/0] via fe80::4638:39ff:fe00:4, swp1, 00:05:36
+  *                    via fe80::4638:39ff:fe00:8, swp2, 00:05:36
+B>* 10.3.3.3/32 [20/0] via fe80::4638:39ff:fe00:5, swp10, 00:01:04
+B>* 10.4.4.4/32 [20/0] via fe80::4638:39ff:fe00:4, swp1, 00:00:04
+  *                    via fe80::4638:39ff:fe00:8, swp2, 00:00:04
+B>* 192.168.200.0/24 [20/0] via fe80::4638:39ff:fe00:5, swp10, 00:01:04
 ```
 
 One can also view the MAC addresses of the two switches within the EVPN instance by running the following command:
 
 ```
-cumulus@switch01:mgmt-vrf:~$ net show evpn mac vni 11
+cumulus@switch01:mgmt-vrf:~$ netq show bgp
 
-Number of MACs (local and remote) known for this VNI: 2
-MAC               Type   Intf/Remote VTEP      VLAN
-44:38:39:00:00:05 local  swp10                 11
-44:38:39:00:00:01 remote 10.2.2.2
+Matching bgp records:
+Hostname          Neighbor                         VRF              ASN        Peer ASN   PfxRx        Last Changed
+----------------- -------------------------------- ---------------- ---------- ---------- ------------ ----------------
+server01          eth1(switch01)                   default          65333      65111      4/-/-        1m:34.731s
+server02          eth1(switch02)                   default          65444      65222      4/-/-        34.73149s
+switch01          swp1(switch02)                   default          65111      65222      4/-/-        6m:6.731s
+switch01          swp10(server01)                  default          65111      65333      3/-/-        1m:34.731s
+switch01          swp2(switch02)                   default          65111      65222      4/-/-        6m:5.731s
+switch02          swp1(switch01)                   default          65222      65111      4/-/-        6m:6.731s
+switch02          swp10(server02)                  default          65222      65444      3/-/-        34.73199s
+switch02          swp2(switch01)                   default          65222      65111      4/-/-        6m:5.732s
 ```
 
 ### Errata
