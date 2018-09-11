@@ -61,12 +61,10 @@
 
 - name: Add netq server IP
   command: netq config add server 192.168.200.250
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Pause to let NetQ service to start
   pause:
     seconds: 5
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: NetQ config add stats
   command: netq config add agent stats
@@ -75,13 +73,10 @@
   service:
     name: rsyslog
     state: restarted
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Restart NetQ Agent
   command: netq config restart agent
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Pause to let NetQ service to start
   pause:
     seconds: 5
-  when: netq_installed.stdout.find('[installed]') == -1
