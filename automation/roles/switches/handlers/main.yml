@@ -14,5 +14,5 @@
 
 - name: restart ntpd
   service:
-    name: ntp@mgmt
+    name: ntp
     state: restarted
