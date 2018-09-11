@@ -56,14 +56,19 @@
   with_items:
     - systemctl stop netqd.service
     - systemctl disable netqd.service
-    - systemctl enable netqd.service
+    - systemctl start netqd.service
     - systemctl stop netq-agent.service
     - systemctl disable netq-agent.service
-    - systemctl enable netq-agent.service
+    - systemctl start netq-agent.service
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add netq server IP
   command: netq config add server 192.168.200.250
+  when: netq_installed.stdout.find('[installed]') == -1
+
+- name: Pause to let NetQ service to start
+  pause:
+    seconds: 5
   when: netq_installed.stdout.find('[installed]') == -1
 
 - name: NetQ config add stats
