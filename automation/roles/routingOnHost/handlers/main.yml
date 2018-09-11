@@ -15,7 +15,7 @@
 - name: reload networking
   service:
     name: networking
-    state: reload
+    state: restarted
 
 - name: restart frr
   service:
