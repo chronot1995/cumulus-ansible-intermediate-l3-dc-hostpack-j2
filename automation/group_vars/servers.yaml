@@ -1,15 +1,95 @@
 node:
   server01:
+    mlag:
+      address:
+      backupip:
+      members:
+      peerip:
+      sysmac:
+      interfaces:
+        bond01:
+          clagid:
+          members:
+          mode:
+          vlans:
+    overlay:
+      anycastip:
+      vxlan:
+        vni11:
+          vlan:
     ports:
-      eth0:
-        dhcp:
-      eth1:
-        ip:
-        gw:
+      - eth1
+    lacp:
+      interfaces:
+        members:
+    switching:
+      swpint:
+        mode:
+        vlans:
+    routing:
+      lo: 10.3.3.3/32
+      ospf:
+        area:
+        neighbors:
+      bgp:
+        asn: 65333
+        underlay:
+          external:
+            peers:
+              - eth1
+          internal:
+            peers:
+      svi:
+        interface:
+          ip:
+          vlan:
+          vrrp:
+            mac:
+            ip:
   server02:
+    mlag:
+      address:
+      backupip:
+      members:
+      peerip:
+      sysmac:
+      interfaces:
+        bond01:
+          clagid:
+          members:
+          mode:
+          vlans:
+    overlay:
+      anycastip:
+      vxlan:
+        vni11:
+          vlan:
     ports:
-      eth0:
-        dhcp:
-      eth1:
-        ip:
-        gw:
+      - eth1
+    lacp:
+      interfaces:
+        members:
+    switching:
+      swpint:
+        mode:
+        vlans:
+    routing:
+      lo: 10.4.4.4/32
+      ospf:
+        area:
+        neighbors:
+      bgp:
+        asn: 65444
+        underlay:
+          external:
+            peers:
+              - eth1
+          internal:
+            peers:
+      svi:
+        interface:
+          ip:
+          vlan:
+          vrrp:
+            mac:
+            ip:
