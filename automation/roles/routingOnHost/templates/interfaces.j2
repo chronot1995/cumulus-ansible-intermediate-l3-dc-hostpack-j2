@@ -11,8 +11,9 @@ iface vagrant inet dhcp
 
 {% for interface in node[inventory_hostname]["ports"] %}
 auto {{interface}}
-iface {{interface}}
+iface {{interface}} inet static
+   address {{node[inventory_hostname]["routing"]["lo"]}}
    mtu 1500
-   post-up ip link set promisc on dev eth1
+   post-up ip link set promisc on dev {{interface}}
 
 {% endfor %}
