@@ -60,7 +60,6 @@
     - systemctl stop netq-agent.service
     - systemctl disable netq-agent.service
     - systemctl start netq-agent.service
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add netq server IP
   command: netq config add server 192.168.200.250
