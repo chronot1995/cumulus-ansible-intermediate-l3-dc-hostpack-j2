@@ -16,20 +16,6 @@
     name: cumulus-netq
     update_cache: yes
 
-- name: Enable and start netqd
-  command: "{{item}}"
-  with_items:
-    - systemctl stop netqd
-    - systemctl enable netqd
-    - systemctl start netqd
-
-- name: Enable and start netq-agent
-  command: "{{item}}"
-  with_items:
-    - systemctl stop netq-agent
-    - systemctl enable netq-agent
-    - systemctl start netq-agent
-
 - name: Pause to let NetQ service to start
   pause:
     seconds: 5
@@ -44,6 +30,20 @@
 
 - name: Restart NetQ Agent
   command: netq config restart agent
+
+- name: Enable and start netqd
+  command: "{{item}}"
+  with_items:
+    - systemctl stop netqd
+    - systemctl enable netqd
+    - systemctl start netqd
+
+- name: Enable and start netq-agent
+  command: "{{item}}"
+  with_items:
+    - systemctl stop netq-agent
+    - systemctl enable netq-agent
+    - systemctl start netq-agent
 
 - name: Sleep for server to disconnect
   pause:
