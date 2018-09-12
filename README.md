@@ -186,3 +186,43 @@ Add the following ```echo``` right before the end of the file.
     echo "############################################"
     echo "      DONE!"
     echo "############################################"
+
+5. Within the Vagrantfile, it's important to make sure the oob-mgmt-server should have the following interface configuration:
+
+device.vm.provider "virtualbox" do |vbox|
+  vbox.customize ['modifyvm', :id, '--nicpromisc2', 'allow-all']
+  vbox.customize ["modifyvm", :id, "--nictype1", "virtio"]
+  vbox.customize ["modifyvm", :id, "--nictype2", "virtio"]
+
+This will make sure that the virtio driver is used to improve the speed of downloading NetQ.
+
+6. helper_scripts > auto_mgmt_network > dhcpd.hosts:
+
+Enable "option routers 192.168.200.254" and 8.8.8.8 as the DNS server:
+
+group {
+
+  option domain-name-servers 8.8.8.8;
+  option domain-name "simulation";
+  option routers 192.168.200.254;
+  option www-server 192.168.200.254;
+  option default-url = "http://192.168.200.254/onie-installer";
+
+7. helper_scripts > auto_mgmt_network > dhcpd.conf:
+
+This is an ancillary configuration to #6
+
+# OOB Management subnet
+shared-network LOCAL-NET{
+subnet 192.168.200.0 netmask 255.255.255.0 {
+  range 192.168.200.10 192.168.200.50;
+  option domain-name-servers 8.8.8.8;
+  option domain-name "simulation";
+  option routers 192.168.200.254;
+  default-lease-time 172800;  #2 days
+  max-lease-time 345600;      #4 days
+  option www-server 192.168.200.254;
+  option default-url = "http://192.168.200.254/onie-installer";
+  option cumulus-provision-url "http://192.168.200.254/ztp_oob.sh";
+  option ntp-servers 192.168.200.254;
+}
