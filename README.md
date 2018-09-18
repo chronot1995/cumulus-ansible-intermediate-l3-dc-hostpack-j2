@@ -66,6 +66,15 @@ Helpful NCLU troubleshooting commands:
 - net show interface | grep -i UP
 - net show lldp
 
+Helpful NetQ troubleshooting commands:
+
+- netq check interfaces
+- netq show interfaces
+- netq show lldp
+- netq show macs
+- netq check bgp
+- netq show bgp
+
 Helpful Linux troubleshooting commands:
 
 - ip route
