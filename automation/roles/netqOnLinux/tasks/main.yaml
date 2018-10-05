@@ -19,6 +19,7 @@
   apt_repository:
     repo: deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb xenial roh-3
     state: present
+    update_cache: yes
 
 - name: Install LLDPd
   apt:
