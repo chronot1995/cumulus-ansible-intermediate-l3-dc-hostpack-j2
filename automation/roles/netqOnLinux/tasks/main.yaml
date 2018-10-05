@@ -8,21 +8,17 @@
   apt_key:
     url: https://apps3.cumulusnetworks.com/setup/cumulus-apps-deb.pubkey
     state: present
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Add Cumulus Repo - netq-latest
   apt_repository:
     repo: deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb xenial netq-latest
     state: present
-    update_cache: no
-  when: netq_installed.stdout.find('[installed]') == -1
+    update_cache: yes
 
 - name: Add Cumulus Repo - roh-3
   apt_repository:
     repo: deb [arch=amd64] https://apps3.cumulusnetworks.com/repos/deb xenial roh-3
     state: present
-    update_cache: no
-  when: netq_installed.stdout.find('[installed]') == -1
 
 - name: Install LLDPd
   apt:
@@ -48,8 +44,7 @@
 - name: Install NetQ
   apt:
     name: cumulus-netq
-    update_cache: yes
-  when: netq_installed.stdout.find('[installed]') == -1
+    state: latest
 
 - name: Configure NetQ
   command: "{{item}}"

@@ -9,12 +9,12 @@
   apt_repository:
     repo: deb http://apps3.cumulusnetworks.com/repos/deb CumulusLinux-3 netq-latest
     state: present
-    update_cache: no
+    update_cache: yes
 
 - name: Install NetQ
   apt:
     name: cumulus-netq
-    update_cache: yes
+    state: latest
 
 - name: Pause to let NetQ service to start
   pause:
