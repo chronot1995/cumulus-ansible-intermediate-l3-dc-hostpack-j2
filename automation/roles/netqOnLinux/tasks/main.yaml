@@ -24,7 +24,6 @@
 - name: Install LLDPd
   apt:
     name: lldpd
-    update_cache: yes
 
 - name: Correct LLDP Settings
   lineinfile:
@@ -39,7 +38,6 @@
 - name: Install ntp
   apt:
     name: ntp
-    update_cache: yes
   notify: restart NTPD
 
 - name: Install NetQ
