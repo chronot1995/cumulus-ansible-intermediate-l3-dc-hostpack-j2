@@ -2,7 +2,9 @@
 
 ### Summary:
 
-Updated and tested against NetQ 1.4!
+Note: 11/2/2018 - Updated and tested with Ansible 2.7.1
+
+Note: 10/7/2018 - Updated and tested against NetQ 1.4!
 
 Intermediate Automation - Two Cumulus VX switches and Two Linux Servers running Host Pack and NetQ in a L3 / BGP Unnumbered configuration using Ansible and J2 / Jinja2 templates
 

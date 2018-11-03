@@ -31,15 +31,6 @@
 - name: Restart NetQ Agent
   command: netq config restart agent
 
-- name: Sleep for server to disconnect
-  pause:
-    seconds: 10
-
-- name: Wait for hosts to be up
-  wait_for:
-    host: "{{ inventory_hostname }}"
-    port: 22
-    state: started
-    delay: 30
-    timeout: 300
-  ignore_errors: true
+- name: reboot
+  reboot:
+    pre_reboot_delay: 60
