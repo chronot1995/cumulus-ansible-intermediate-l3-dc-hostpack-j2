@@ -1,4 +1,4 @@
-### DEPRICATED - Future Cumulus installs should be based on NetQ 2.x
+### DEPRECATED - Future Cumulus installs should be based on NetQ 2.x
 
 # int-ansible-training-l3-dc-hostpack-j2
 
