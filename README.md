@@ -1,4 +1,4 @@
-### DEPRECATED - Future Cumulus installs should be based on NetQ 2.x
+### DEPRECATED - Please check out Nvidia Air at https://air.nvidia.com for up-to-date examples
 
 # int-ansible-training-l3-dc-hostpack-j2
 
